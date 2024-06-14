@@ -2,10 +2,18 @@ package com.ps.DAOs;
 
 import com.ps.DAOs.Interfaces.SalesContractInt;
 import com.ps.Models.SalesContract;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.util.List;
 
 public class SalesContractDAO implements SalesContractInt {
+
+    private BasicDataSource basicDataSource;
+
+    public SalesContractDAO(BasicDataSource basicDataSource) {
+        this.basicDataSource = basicDataSource;
+    }
+
     @Override
     public List<SalesContract> getAllSalesContracts() {
         return List.of();

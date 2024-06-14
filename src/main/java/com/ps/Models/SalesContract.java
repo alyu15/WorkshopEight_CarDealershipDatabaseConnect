@@ -18,44 +18,6 @@ public class SalesContract extends Contract {
         this.financeChoice = financeChoice;
     }
 
-    @Override
-    public double getTotalPrice() {
-        Vehicle vehicle = getVehicleSold();
-        double totalAmount = vehicle.getPrice() + getRecordingFee() + getProcessingFee()
-                + getMonthlyPayment() + getSalesTaxAmount();
-        return totalAmount;
-    }
-
-    @Override
-    public double getMonthlyPayment() {
-
-        double loanAmount;
-        double monthlyInterestRate;
-        double exponent;
-        double paymentPerMonth;
-        int loanTermInMonths;
-
-        if(isFinanceChoice()) {
-            Vehicle vehicle = getVehicleSold();
-            if(vehicle.getPrice() > 10_000) {
-                loanAmount = this.getVehicleSold().getPrice() * 0.0425;
-                monthlyInterestRate = 0.0425/12;
-                loanTermInMonths = 48;
-
-            } else {
-                loanAmount = vehicle.getPrice() * 0.0525;
-                monthlyInterestRate = 0.0525 / 12;
-                loanTermInMonths = 24;
-            }
-            exponent = Math.pow(1+monthlyInterestRate,loanTermInMonths);
-            paymentPerMonth = (loanAmount*monthlyInterestRate*exponent)/(exponent-1);
-
-            return paymentPerMonth * loanTermInMonths;
-        } else {
-            return 0;
-        }
-    }
-
     public double getSalesTaxAmount() {
         return salesTaxAmount;
     }
@@ -84,5 +46,14 @@ public class SalesContract extends Contract {
         this.financeChoice = financeChoice;
     }
 
+    @Override
+    public String toString() {
+        return "SalesContract{" +
+                "salesTaxAmount=" + salesTaxAmount +
+                ", recordingFee=" + recordingFee +
+                ", processingFee=" + processingFee +
+                ", financeChoice=" + financeChoice +
+                "}\n";
+    }
 }
 

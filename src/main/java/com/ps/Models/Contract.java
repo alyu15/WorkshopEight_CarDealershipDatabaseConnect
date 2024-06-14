@@ -6,8 +6,6 @@ public abstract class Contract {
     private String customerName;
     private String customerEmail;
     private Vehicle vehicleSold;
-    private double totalPrice;
-    private double monthlyPayment;
 
     public Contract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold) {
         this.dateOfContract = dateOfContract;
@@ -18,10 +16,6 @@ public abstract class Contract {
 
     protected Contract() {
     }
-
-    public abstract double getTotalPrice();
-
-    public abstract double getMonthlyPayment();
 
     public String getDateOfContract() {
         return dateOfContract;

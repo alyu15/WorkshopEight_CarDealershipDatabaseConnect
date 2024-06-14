@@ -8,7 +8,7 @@ public interface VehicleInt {
 
     List<Vehicle> getAllVehicles();
     Vehicle getOneVehicle(int id);
-    int createVehicle(Vehicle vehicle);
+    void createVehicle(Vehicle vehicle);
     void updateVehicle(int id, Vehicle vehicle);
     void deleteVehicle(int id);
 }

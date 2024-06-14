@@ -38,7 +38,7 @@
 		year int NOT NULL,
 		make varchar(50) NOT NULL,
 		model varchar(50) NOT NULL,
-		vehicle_type varchar(30),
+		type varchar(30),
 		color varchar(30) NOT NULL,
 		odometer int NOT NULL,
 		price decimal(10,2) NOT NULL,
@@ -119,7 +119,7 @@
 #						    Vehicles Data								 #
 # ====================================================================== #
 
-	INSERT INTO vehicles(vin, year, make, model, vehicle_type, color, odometer, price, sold_or_leased)
+	INSERT INTO vehicles(vin, year, make, model, type, color, odometer, price, sold_or_leased)
 		VALUE(10112,1993,'Ford','Explorer','SUV','Red',525123,9900.00,'sold'),
 			(37846,2012,'Honda','Civic','Sedan','Gray',103221,6895.00, NULL),
 			(44875,2006,'Nissan','Altima','Sedan','Blue',137850,3995.00,'sold'),

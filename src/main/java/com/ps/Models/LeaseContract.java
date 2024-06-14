@@ -12,23 +12,6 @@ public class LeaseContract extends Contract{
         this.leaseFee = vehicleSold.getPrice() * 0.07;
     }
 
-    @Override
-    public double getTotalPrice() {
-        return getExpectedEndingValue() + getLeaseFee();
-    }
-
-    @Override
-    public double getMonthlyPayment() {
-        Vehicle vehicle = getVehicleSold();
-        double loanAmount = vehicle.getPrice();
-        double monthlyInterestRate = 0.04/12;
-        int loanTermInMonths = 36;
-        double exponent = Math.pow(1 + monthlyInterestRate, loanTermInMonths);
-        double paymentPerMonth = (loanAmount * monthlyInterestRate * exponent) / (exponent - 1);
-
-        return paymentPerMonth;
-    }
-
     public double getExpectedEndingValue() {
         return expectedEndingValue;
     }
@@ -37,5 +20,12 @@ public class LeaseContract extends Contract{
         return leaseFee;
     }
 
+    @Override
+    public String toString() {
+        return "LeaseContract{" +
+                "expectedEndingValue=" + expectedEndingValue +
+                ", leaseFee=" + leaseFee +
+                "}\n";
+    }
 }
 

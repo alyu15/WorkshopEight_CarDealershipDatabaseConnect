@@ -2,10 +2,18 @@ package com.ps.DAOs;
 
 import com.ps.DAOs.Interfaces.DealershipInt;
 import com.ps.Models.Dealership;
+import org.apache.commons.dbcp2.BasicDataSource;
 
 import java.util.List;
 
 public class DealershipDAO implements DealershipInt {
+
+    private BasicDataSource basicDataSource;
+
+    public DealershipDAO(BasicDataSource basicDataSource) {
+        this.basicDataSource = basicDataSource;
+    }
+
     @Override
     public List<Dealership> getAllDealerships() {
         return List.of();

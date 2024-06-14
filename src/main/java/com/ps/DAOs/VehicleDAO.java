@@ -2,33 +2,211 @@ package com.ps.DAOs;
 
 import com.ps.DAOs.Interfaces.VehicleInt;
 import com.ps.Models.Vehicle;
+import org.apache.commons.dbcp2.BasicDataSource;
 
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDAO implements VehicleInt {
 
+    private BasicDataSource basicDataSource;
+
+    public VehicleDAO(BasicDataSource basicDataSource) {
+        this.basicDataSource = basicDataSource;
+    }
+
     @Override
     public List<Vehicle> getAllVehicles() {
-        return List.of();
+
+        List<Vehicle> vehicles = new ArrayList<>();
+
+        try(
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM dealership_db.vehicles"
+                );
+                ResultSet resultSet = preparedStatement.executeQuery();
+        ) {
+            while(resultSet.next()) {
+
+                Vehicle vehicle = generateVehicleFromResultSet(resultSet);
+                vehicles.add(vehicle);
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return vehicles;
     }
 
     @Override
     public Vehicle getOneVehicle(int id) {
-        return null;
+
+        Vehicle vehicle = null;
+
+        try(
+
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "SELECT * FROM vehicles WHERE vin = ?"
+                );
+        ) {
+            preparedStatement.setInt(1, id);
+
+            try (
+
+                    ResultSet resultSet = preparedStatement.executeQuery();
+            ) {
+                while(resultSet.next()) {
+
+                    vehicle = generateVehicleFromResultSet(resultSet);
+                }
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return vehicle;
     }
 
     @Override
-    public int createVehicle(Vehicle vehicle) {
-        return 0;
+    public void createVehicle(Vehicle vehicle) {
+
+        try (
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "INSERT INTO vehicles(vin, year, make, model, type, color, odometer, price, sold_or_leased)" +
+                                "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                );
+        ) {
+            generateNewVehicleParameters(preparedStatement, vehicle);
+            preparedStatement.executeUpdate();
+
+            System.out.println("\n    *************************** You have successfully added a new vehicle! ******************************");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void updateVehicle(int id, Vehicle vehicle) {
 
+        try (
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "UPDATE vehicles SET year = ?, make = ?, model = ?, type = ?," +
+                                "color = ?, odometer = ?, price = ?, sold_or_leased = ?" +
+                                "WHERE vin = ?"
+                );
+        ) {
+
+            generateUpdateVehicleParameters(preparedStatement, vehicle);
+            preparedStatement.executeUpdate();
+
+            System.out.println("\n    *************************** You have successfully updated the vehicle! ******************************");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     public void deleteVehicle(int id) {
+
+        try (
+                Connection connection = basicDataSource.getConnection();
+                PreparedStatement preparedStatement = connection.prepareStatement(
+                        "DELETE FROM vehicles WHERE vin = ?"
+                );
+        ) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+            System.out.println("\n    **************************** You have successfully removed a vehicle! *******************************");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+//    public List<Vehicle> getVehiclesByPrice(float minPrice, float maxPrice) {
+//
+//        List<Vehicle> vehicles = new ArrayList<>();
+//
+//        try (
+//                Connection
+//                )
+//
+//        return List.of();
+//    }
+
+    public List<Vehicle> getVehiclesByYear(int minYear, int maxYear){
+
+        return List.of();
+    }
+
+    public List<Vehicle> getVehiclesByColor(String color) {
+
+        return List.of();
+    }
+
+    public List<Vehicle> getVehiclesByMileage(int minMileage, int maxMileage){
+
+        return List.of();
+    }
+
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
+
+        return List.of();
+    }
+
+    public Vehicle generateVehicleFromResultSet(ResultSet resultSet) throws SQLException {
+
+        int vin = resultSet.getInt("vin");
+        int year = resultSet.getInt("year");
+        String make = resultSet.getString("make");
+        String model = resultSet.getString("model");
+        String type = resultSet.getString("type");
+        String color = resultSet.getString("color");
+        int odometer = resultSet.getInt("odometer");
+        double price = resultSet.getDouble("price");
+        String soldOrLeased = resultSet.getString("sold_or_leased");
+
+        return new Vehicle(vin, year, make, model, type, color, odometer, price, soldOrLeased);
+    }
+
+    public void generateNewVehicleParameters(PreparedStatement preparedStatement, Vehicle vehicle) throws SQLException {
+
+        preparedStatement.setInt(1, vehicle.getVin());
+        preparedStatement.setInt(2, vehicle.getYear());
+        preparedStatement.setString(3, vehicle.getMake());
+        preparedStatement.setString(4, vehicle.getModel());
+        preparedStatement.setString(5, vehicle.getVehicleType());
+
+        preparedStatement.setString(6, vehicle.getColor());
+        preparedStatement.setInt(7, vehicle.getOdometer());
+        preparedStatement.setDouble(8, vehicle.getPrice());
+        preparedStatement.setString(9, vehicle.getSoldOrLeased());
+
+    }
+
+    public void generateUpdateVehicleParameters(PreparedStatement preparedStatement, Vehicle vehicle) throws SQLException {
+
+        preparedStatement.setInt(1, vehicle.getYear());
+        preparedStatement.setString(2, vehicle.getMake());
+        preparedStatement.setString(3, vehicle.getModel());
+        preparedStatement.setString(4, vehicle.getVehicleType());
+
+        preparedStatement.setString(5, vehicle.getColor());
+        preparedStatement.setInt(6, vehicle.getOdometer());
+        preparedStatement.setDouble(7, vehicle.getPrice());
+        preparedStatement.setString(8, vehicle.getSoldOrLeased());
+        preparedStatement.setInt(9, vehicle.getVin());
 
     }
 }

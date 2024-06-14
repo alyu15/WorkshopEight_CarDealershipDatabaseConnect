@@ -10,6 +10,7 @@ public class Vehicle {
     private String color;
     private int odometer;
     private double price;
+    private String soldOrLeased = null;
 
     public Vehicle(){
     }
@@ -23,6 +24,18 @@ public class Vehicle {
         this.color = color;
         this.odometer = odometer;
         this.price = price;
+    }
+
+    public Vehicle(int vin, int year, String make, String model, String vehicleType, String color, int odometer, double price, String soldOrLeased) {
+        this.vin = vin;
+        this.year = year;
+        this.make = make;
+        this.model = model;
+        this.vehicleType = vehicleType;
+        this.color = color;
+        this.odometer = odometer;
+        this.price = price;
+        this.soldOrLeased = soldOrLeased;
     }
 
     public int getVin() {
@@ -89,6 +102,14 @@ public class Vehicle {
         this.price = price;
     }
 
+    public String getSoldOrLeased() {
+        return soldOrLeased;
+    }
+
+    public void setSoldOrLeased(String soldOrLeased) {
+        this.soldOrLeased = soldOrLeased;
+    }
+
     @Override
     public String toString() {
         return "Vehicle{" +
@@ -100,6 +121,7 @@ public class Vehicle {
                 ", color='" + color + '\'' +
                 ", odometer=" + odometer +
                 ", price=" + price +
-                '}';
+                ", soldOrLeased='" + soldOrLeased + '\'' +
+                "}\n";
     }
 }

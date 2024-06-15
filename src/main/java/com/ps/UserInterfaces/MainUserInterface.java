@@ -167,18 +167,24 @@ public class MainUserInterface {
             System.out.println("===========================================  Manage Vehicles  ===============================================\n");
             System.out.println("* Please select one of the following options:\n");
             System.out.println("~ (1) Add a Vehicle");
+            System.out.println("~ (2) Update a Vehicle");
             System.out.println("~ (2) Remove a Vehicle");
             System.out.println("~ (0) Return to HOME menu");
 
             managingVehiclesInput = scanner.next().trim();
 
             switch (managingVehiclesInput) {
-                case "1":
 
+                case "1":
+                    handleAddVehicle();
                     break;
 
                 case "2":
+                    handleUpdateVehicle();
+                    break;
 
+                case "3":
+                    handleRemoveVehicle();
                     break;
 
                 case "0":
@@ -357,6 +363,129 @@ public class MainUserInterface {
 
         List<Vehicle> vehicles = vehicleDAO.getVehiclesByType(vehicleType);
         displayVehicles(vehicles);
+
+    }
+
+    public static void handleAddVehicle() {
+
+        System.out.println("\n* Please enter in the VIN of the vehicle:");
+        int newVehicleVin;
+        while(true) {
+            if (scanner.hasNextInt()) {
+                newVehicleVin = scanner.nextInt();
+                break;
+            } else {
+                System.out.println("* Please enter in a number.");
+                scanner.next();
+            }
+        }
+
+        System.out.println("* Please enter in the Year of the vehicle:");
+        int newVehicleYear;
+        while(true) {
+            if (scanner.hasNextInt()) {
+                newVehicleYear = scanner.nextInt();
+                break;
+            } else {
+                System.out.println("* Please enter in a number.");
+                scanner.next();
+            }
+        }
+
+        System.out.println("* Please enter in the Make of the vehicle:");
+        String newVehicleMake;
+        while (true) {
+            newVehicleMake = scanner.next().trim();
+            if (newVehicleMake.isEmpty()) {
+                System.out.println("* Please enter in a vehicle make.");
+            } else {
+                break;
+            }
+        }
+
+        String newVehicleMakeEntry = newVehicleMake.substring(0, 1).toUpperCase() + newVehicleMake.substring(1);
+
+        System.out.println("* Please enter in the Model of the vehicle:");
+        String newVehicleModel;
+        while (true) {
+            newVehicleModel = scanner.next().trim();
+            if (newVehicleModel.isEmpty()) {
+                System.out.println("* Please enter in a vehicle model.");
+            } else {
+                break;
+            }
+        }
+        String newVehicleModelEntry = newVehicleModel.substring(0,1).toUpperCase() + newVehicleModel.substring(1);
+
+        System.out.println("* Please enter in the Type of the vehicle:");
+        String newVehicleType;
+        while (true) {
+            newVehicleType = scanner.next().trim();
+            if (newVehicleType.isEmpty()) {
+                System.out.println("* Please enter in a vehicle type");
+            } else {
+                break;
+            }
+        }
+        String newVehicleTypeEntry = newVehicleType.substring(0,1).toUpperCase() + newVehicleType.substring(1);
+
+        System.out.println("* Please enter in the Color of the vehicle:");
+        String newVehicleColor;
+        while (true) {
+            newVehicleColor = scanner.next().trim();
+            if (newVehicleColor.matches(".*\\d.*") || newVehicleColor.isEmpty()) {
+                System.out.println("* Please enter in a color.");
+            } else {
+                break;
+            }
+        }
+        String newVehicleColorEntry = newVehicleColor.substring(0,1).toUpperCase() + newVehicleColor.substring(1);
+
+        System.out.println("* Please enter in the Mileage of the vehicle:");
+            int newVehicleMileage;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        newVehicleMileage = scanner.nextInt();
+                    break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("* Please enter in the Price of the vehicle:");
+            double newVehiclePrice;
+                while(true) {
+                    if (scanner.hasNextDouble()) {
+                        newVehiclePrice = scanner.nextDouble();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
+
+        Vehicle vehicle = new Vehicle(newVehicleVin, newVehicleYear, newVehicleMakeEntry, newVehicleModelEntry, newVehicleTypeEntry,
+                newVehicleColorEntry, newVehicleMileage, newVehiclePrice
+                );
+
+        vehicleDAO.createVehicle(vehicle);
+    }
+
+    public static void handleUpdateVehicle() {
+
+    }
+
+    public static void handleRemoveVehicle() {
+
+        System.out.println("* Please enter in the VIN of the Vehicle you would like to remove");
+            int removeVin = scanner.nextInt();
+
+        System.out.println("\n* Are you sure you want to remove " + removeVin + "?");
+            String confirmInput = scanner.next().toLowerCase().trim();
+                if(confirmInput.equals("yes")) {
+                    leaseContractDAO.deleteLeaseContract(removeVin);
+                }
 
     }
 

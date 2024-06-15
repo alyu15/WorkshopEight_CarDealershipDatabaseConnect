@@ -25,8 +25,8 @@ public class LeaseContractDAO implements LeaseContractInt {
     }
 
     @Override
-    public int createLeaseContract(LeaseContract leaseContract) {
-        return 0;
+    public void createLeaseContract(LeaseContract leaseContract) {
+
     }
 
     @Override

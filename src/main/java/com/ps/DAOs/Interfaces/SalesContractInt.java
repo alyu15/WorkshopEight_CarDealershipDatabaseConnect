@@ -8,7 +8,7 @@ public interface SalesContractInt {
 
     List<SalesContract> getAllSalesContracts();
     SalesContract getOneSalesContract(int id);
-    int createSalesContract(SalesContract salesContract);
+    void createSalesContract(SalesContract salesContract);
     void updateSalesContract(int id, SalesContract salesContract);
     void deleteSalesContract(int id);
 }

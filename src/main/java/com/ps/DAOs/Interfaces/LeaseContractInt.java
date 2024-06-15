@@ -8,7 +8,7 @@ public interface LeaseContractInt {
 
     List<LeaseContract> getAllLeaseContracts();
     LeaseContract getOneLeaseContract(int id);
-    int createLeaseContract(LeaseContract leaseContract);
+    void createLeaseContract(LeaseContract leaseContract);
     void updateLeaseContract(int id, LeaseContract leaseContract);
     void deleteLeaseContract(int id);
 }

@@ -2,28 +2,35 @@ package com.ps.Models;
 
 public class SalesContract extends Contract {
 
-    private double salesTaxAmount;
-    private int recordingFee = 100;
+    private float salesTaxAmount;
+    private int recordingFee;
     private int processingFee;
-    private boolean financeChoice;
+    private String financeChoice;
 
-    public SalesContract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold, boolean financeChoice) {
-        super(dateOfContract, customerName, customerEmail, vehicleSold);
-        this.salesTaxAmount = vehicleSold.getPrice() * 0.05;
-        if(vehicleSold.getPrice() < 10_000) {
-            this.processingFee = 295;
-        } else {
-            this.processingFee = 495;
-        }
+    public SalesContract(int contractId, String contractDate, String customerName, String customerEmail, int vin,
+                         float salesTaxAmount, int recordingFee, int processingFee, String financeChoice) {
+
+        super(contractId, contractDate, customerName, customerEmail, vin);
+        this.salesTaxAmount = salesTaxAmount;
+        this.recordingFee = recordingFee;
+        this.processingFee = processingFee;
         this.financeChoice = financeChoice;
     }
 
-    public double getSalesTaxAmount() {
+    public float getSalesTaxAmount() {
         return salesTaxAmount;
     }
 
-    public void setSalesTaxAmount(double salesTaxAmount) {
+    public void setSalesTaxAmount(float salesTaxAmount) {
         this.salesTaxAmount = salesTaxAmount;
+    }
+
+    public int getRecordingFee() {
+        return recordingFee;
+    }
+
+    public void setRecordingFee(int recordingFee) {
+        this.recordingFee = recordingFee;
     }
 
     public int getProcessingFee() {
@@ -34,15 +41,11 @@ public class SalesContract extends Contract {
         this.processingFee = processingFee;
     }
 
-    public int getRecordingFee() {
-        return recordingFee;
-    }
-
-    public boolean isFinanceChoice() {
+    public String getFinanceChoice() {
         return financeChoice;
     }
 
-    public void setFinanceChoice(boolean financeChoice) {
+    public void setFinanceChoice(String financeChoice) {
         this.financeChoice = financeChoice;
     }
 
@@ -52,8 +55,8 @@ public class SalesContract extends Contract {
                 "salesTaxAmount=" + salesTaxAmount +
                 ", recordingFee=" + recordingFee +
                 ", processingFee=" + processingFee +
-                ", financeChoice=" + financeChoice +
-                "}\n";
+                ", financeChoice='" + financeChoice + '\'' +
+                '}';
     }
 }
 

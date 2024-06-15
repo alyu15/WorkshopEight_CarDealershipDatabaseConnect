@@ -2,27 +2,34 @@ package com.ps.Models;
 
 public abstract class Contract {
 
-    private String dateOfContract;
+    private int contractId;
+    private String contractDate;
     private String customerName;
     private String customerEmail;
-    private Vehicle vehicleSold;
+    private int vin;
 
-    public Contract(String dateOfContract, String customerName, String customerEmail, Vehicle vehicleSold) {
-        this.dateOfContract = dateOfContract;
+    public Contract(int contractId, String contractDate, String customerName, String customerEmail, int vin) {
+        this.contractId = contractId;
+        this.contractDate = contractDate;
         this.customerName = customerName;
         this.customerEmail = customerEmail;
-        this.vehicleSold = vehicleSold;
+        this.vin = vin;
     }
 
-    protected Contract() {
+    public int getContractId() {
+        return contractId;
     }
 
-    public String getDateOfContract() {
-        return dateOfContract;
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
     }
 
-    public void setDateOfContract(String dateOfContract) {
-        this.dateOfContract = dateOfContract;
+    public String getContractDate() {
+        return contractDate;
+    }
+
+    public void setContractDate(String contractDate) {
+        this.contractDate = contractDate;
     }
 
     public String getCustomerName() {
@@ -41,12 +48,12 @@ public abstract class Contract {
         this.customerEmail = customerEmail;
     }
 
-    public Vehicle getVehicleSold() {
-        return vehicleSold;
+    public int getVin() {
+        return vin;
     }
 
-    public void setVehicleSold(Vehicle vehicleSold) {
-        this.vehicleSold = vehicleSold;
+    public void setVin(int vin) {
+        this.vin = vin;
     }
 
 }

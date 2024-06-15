@@ -10,7 +10,7 @@ public class Vehicle {
     private String color;
     private int odometer;
     private double price;
-    private String soldOrLeased = null;
+    private String soldOrLeased;
 
     public Vehicle(){
     }

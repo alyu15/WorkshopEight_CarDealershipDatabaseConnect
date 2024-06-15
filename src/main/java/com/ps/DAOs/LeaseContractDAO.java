@@ -144,7 +144,7 @@ public class LeaseContractDAO implements LeaseContractInt {
         String customerEmail = resultSet.getString("customer_email");
         int vin = resultSet.getInt("vin");
 
-        int leaseFee = resultSet.getInt("lease_fee");
+        float leaseFee = resultSet.getInt("lease_fee");
         double expectedEndingValue = resultSet.getDouble("expected_ending_value");
 
         return new LeaseContract(id, contractDate, customerName, customerEmail, vin,
@@ -160,7 +160,7 @@ public class LeaseContractDAO implements LeaseContractInt {
         preparedStatement.setString(4, leaseContract.getCustomerEmail());
 
         preparedStatement.setInt(5, leaseContract.getVin());
-        preparedStatement.setInt(6, leaseContract.getLeaseFee());
+        preparedStatement.setFloat(6, leaseContract.getLeaseFee());
         preparedStatement.setDouble(7, leaseContract.getExpectedEndingValue());
 
     }
@@ -172,7 +172,7 @@ public class LeaseContractDAO implements LeaseContractInt {
         preparedStatement.setString(3, leaseContract.getCustomerEmail());
         preparedStatement.setInt(4, leaseContract.getVin());
 
-        preparedStatement.setInt(5, leaseContract.getLeaseFee());
+        preparedStatement.setFloat(5, leaseContract.getLeaseFee());
         preparedStatement.setDouble(6, leaseContract.getExpectedEndingValue());
         preparedStatement.setInt(7, leaseContract.getContractId());
 

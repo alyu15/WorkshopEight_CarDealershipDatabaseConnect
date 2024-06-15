@@ -82,7 +82,7 @@ public class MainUserInterface {
                     break;
 
                 case "4":
-                    SalesAndLeases.handleMenu();
+                    SalesAndLeases.handleMenu(salesContractDAO, leaseContractDAO);
                     break;
 
                 case "0":

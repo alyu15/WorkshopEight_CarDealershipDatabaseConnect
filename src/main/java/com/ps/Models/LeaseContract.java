@@ -2,22 +2,22 @@ package com.ps.Models;
 
 public class LeaseContract extends Contract{
 
-    private int leaseFee;
+    private float leaseFee;
     private double expectedEndingValue;
 
     public LeaseContract(int contractId, String contractDate, String customerName,
-                         String customerEmail, int vin, int leaseFee, double expectedEndingValue) {
+                         String customerEmail, int vin, float leaseFee, double expectedEndingValue) {
 
         super(contractId, contractDate, customerName, customerEmail, vin);
         this.leaseFee = leaseFee;
         this.expectedEndingValue = expectedEndingValue;
     }
 
-    public int getLeaseFee() {
+    public float getLeaseFee() {
         return leaseFee;
     }
 
-    public void setLeaseFee(int leaseFee) {
+    public void setLeaseFee(float leaseFee) {
         this.leaseFee = leaseFee;
     }
 

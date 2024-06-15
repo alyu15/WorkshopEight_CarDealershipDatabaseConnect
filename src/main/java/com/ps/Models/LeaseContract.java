@@ -2,12 +2,22 @@ package com.ps.Models;
 
 public class LeaseContract extends Contract{
 
+    private int leaseFee;
     private double expectedEndingValue;
-    private double leaseFee;
 
-    public LeaseContract(int contractId, String contractDate, String customerName, String customerEmail, int vin, double expectedEndingValue, double leaseFee) {
+    public LeaseContract(int contractId, String contractDate, String customerName,
+                         String customerEmail, int vin, int leaseFee, double expectedEndingValue) {
+
         super(contractId, contractDate, customerName, customerEmail, vin);
+        this.leaseFee = leaseFee;
         this.expectedEndingValue = expectedEndingValue;
+    }
+
+    public int getLeaseFee() {
+        return leaseFee;
+    }
+
+    public void setLeaseFee(int leaseFee) {
         this.leaseFee = leaseFee;
     }
 
@@ -19,19 +29,11 @@ public class LeaseContract extends Contract{
         this.expectedEndingValue = expectedEndingValue;
     }
 
-    public double getLeaseFee() {
-        return leaseFee;
-    }
-
-    public void setLeaseFee(double leaseFee) {
-        this.leaseFee = leaseFee;
-    }
-
     @Override
     public String toString() {
         return "LeaseContract{" +
-                "expectedEndingValue=" + expectedEndingValue +
-                ", leaseFee=" + leaseFee +
+                "leaseFee=" + leaseFee +
+                ", expectedEndingValue=" + expectedEndingValue +
                 '}';
     }
 }

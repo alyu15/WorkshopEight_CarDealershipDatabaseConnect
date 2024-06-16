@@ -108,7 +108,7 @@ public class VehicleDAO implements VehicleInt {
             generateUpdateVehicleParameters(preparedStatement, vehicle);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n    *************************** You have successfully updated the vehicle! ******************************");
+            System.out.println("\n    *************************** You have successfully updated the vehicle! ******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -128,7 +128,7 @@ public class VehicleDAO implements VehicleInt {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n    **************************** You have successfully removed a vehicle! *******************************");
+            System.out.println("\n    **************************** You have successfully removed a vehicle! *******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();

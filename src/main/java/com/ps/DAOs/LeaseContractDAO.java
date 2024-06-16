@@ -85,7 +85,7 @@ public class LeaseContractDAO implements LeaseContractInt {
             generateNewLeaseContractParameters(preparedStatement, leaseContract);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n       *************************** You have successfully created a new Lease contract! *****************************");
+            System.out.println("\n       *************************** You have successfully created a new Lease contract! *****************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -101,14 +101,14 @@ public class LeaseContractDAO implements LeaseContractInt {
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "UPDATE lease_contracts SET contract_date = ?, customer_name = ?, customer_email = ?," +
                                 "vin = ?, lease_fee = ?, expected_ending_value = ?" +
-                                "WHERE contract_id = ?)"
+                                "WHERE contract_id = ?"
                 );
         ) {
 
             generateUpdateLeaseContractParameters(preparedStatement, leaseContract);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n       *************************** You have successfully updated the contract! ******************************");
+            System.out.println("\n       *************************** You have successfully updated the contract! ******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -128,7 +128,7 @@ public class LeaseContractDAO implements LeaseContractInt {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n    **************************** You have successfully removed a Lease Contract! *******************************");
+            System.out.println("\n    **************************** You have successfully removed a Lease Contract! *******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();

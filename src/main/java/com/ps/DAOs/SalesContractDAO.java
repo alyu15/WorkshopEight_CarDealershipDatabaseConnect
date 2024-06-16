@@ -85,7 +85,7 @@ public class SalesContractDAO implements SalesContractInt {
             generateNewSalesContractParameters(preparedStatement, salesContract);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n       *************************** You have successfully created a new Sales contract! *****************************");
+            System.out.println("\n       *************************** You have successfully created a new Sales contract! *****************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -100,14 +100,14 @@ public class SalesContractDAO implements SalesContractInt {
                 PreparedStatement preparedStatement = connection.prepareStatement(
                         "UPDATE sales_contracts SET contract_date = ?, customer_name = ?, customer_email = ?," +
                                 "vin = ?, sales_tax_amount = ?, recording_fee = ?, processing_fee = ?, is_financing = ?" +
-                                "WHERE contract_id = ?)"
+                                "WHERE contract_id = ?"
                 );
         ) {
 
             generateUpdateSalesContractParameters(preparedStatement, salesContract);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n       *************************** You have successfully updated the contract! ******************************");
+            System.out.println("\n       *************************** You have successfully updated the contract! ******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -127,7 +127,7 @@ public class SalesContractDAO implements SalesContractInt {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
 
-            System.out.println("\n    **************************** You have successfully removed a Sales Contract! *******************************");
+            System.out.println("\n    **************************** You have successfully removed a Sales Contract! *******************************\n");
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -172,11 +172,13 @@ public class SalesContractDAO implements SalesContractInt {
         preparedStatement.setString(2,salesContract.getCustomerName());
         preparedStatement.setString(3, salesContract.getCustomerEmail());
         preparedStatement.setInt(4, salesContract.getVin());
-
         preparedStatement.setFloat(5, salesContract.getSalesTaxAmount());
+
         preparedStatement.setInt(6, salesContract.getRecordingFee());
-        preparedStatement.setString(7, salesContract.getFinanceChoice());
-        preparedStatement.setInt(8, salesContract.getContractId());
+        preparedStatement.setInt(7, salesContract.getProcessingFee());
+        preparedStatement.setString(8, salesContract.getFinanceChoice());
+        preparedStatement.setInt(9, salesContract.getContractId());
+
 
     }
 }

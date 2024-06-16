@@ -32,7 +32,7 @@ Since the application is pretty similar to its predecessor, I will be glossing o
 ><details>
 ><summary> Manage Vehicles Screen </summary>
 >
-> ![ManageVehicles](https://github.com/alyu15/WorkshopFive_CarDealershipPart2/blob/7f801e60c66e603f04c420eab3f73f97b2115b9f/Images/ManageVehiclesScreen.PNG)
+> 
 ></details>
 
 If the user chooses 'Update a vehicle', they are first prompted to enter in the VIN of the vehicle they would like to update.
@@ -67,8 +67,28 @@ Afterwards, the user is shown a list which they are able to select from to updat
 ## Interesting Piece of Code
 
 ```
+ public Vehicle generateVehicleFromResultSet(ResultSet resultSet) throws SQLException {
 
+        int vin = resultSet.getInt("vin");
+        int year = resultSet.getInt("year");
+        String make = resultSet.getString("make");
+        String model = resultSet.getString("model");
+        String type = resultSet.getString("type");
+        String color = resultSet.getString("color");
+        int odometer = resultSet.getInt("odometer");
+        double price = resultSet.getDouble("price");
+        String soldOrLeased = resultSet.getString("sold_or_leased");
+
+        return new Vehicle(vin, year, make, model, type, color, odometer, price, soldOrLeased);
+    }
 ```
+I chose this piece of code because I felt like it played a big part in making my code look more neat. 
+By using this piece of code, I was able to keep my code organized and prevent it from being repetitive.
+I found it interesting because it's a simple return method that ended up doing so much and helping me a lot.
+
+<br>
+<div align="center">
+<b>Thank you for taking the time out to check out my application!</b>
 
 
-
+</div>

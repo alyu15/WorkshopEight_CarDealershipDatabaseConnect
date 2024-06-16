@@ -65,7 +65,7 @@
 
 	CREATE TABLE sales_contracts(
 		contract_id int NOT NULL auto_increment,
-		contract_date DATE,
+		contract_date varchar(10),
 		customer_name varchar(50) NOT NULL,
 		customer_email varchar(80) NOT NULL,
 		vin int NOT NULL,
@@ -83,7 +83,7 @@
 
 	CREATE TABLE lease_contracts(
 		contract_id int NOT NULL auto_increment,
-		contract_date DATE,
+		contract_date varchar(10),
 		customer_name varchar(50) NOT NULL,
 		customer_email varchar(80) NOT NULL,
 		vin int NOT NULL,

@@ -42,10 +42,6 @@ public class MainUserInterface {
         System.out.println("                                                  --  How may we help you?  --");
         System.out.println("**********************************************************************************************************************************");
 
-//        Vehicle vehicle = vehicleDAO.getOneVehicle(1);
-//        vehicle.setSoldOrLeased("leased");
-//
-//        vehicleDAO.updateVehicle(1, vehicle);
         handleMainMenu();
 
     }
@@ -489,12 +485,188 @@ public class MainUserInterface {
 
         Vehicle vehicle = vehicleDAO.getOneVehicle(vin);
 
-        System.out.println("\n* What would you like to update?\n");
-        System.out.println("~ (1) Year\n~ (2) Make\n~ (3) Model\n~ (4) Vehicle Type\n~ (5) Color\n~ (6) Odometer\n~ (7) Price\n~ (8) Sold or Leased\n~ (0) Return to previous menu");
-            int updateInput;
+        int updateInput;
+
+        do {
+            System.out.println("\n* What would you like to update?\n");
+            System.out.println("~ (1) Year\n~ (2) Make\n~ (3) Model\n~ (4) Vehicle Type\n~ (5) Color\n~ (6) Odometer\n~ (7) Price\n~ (8) Sold or Leased\n~ (0) Return to previous menu");
+
+            while (true) {
+                if (scanner.hasNextInt()) {
+                    updateInput = scanner.nextInt();
+                    break;
+                } else {
+                    System.out.println("* Please enter in a number.");
+                    scanner.next();
+                }
+            }
+
+            switch (updateInput) {
+
+                case 1:
+
+                    System.out.println("* Please enter the updated Year of the Vehicle:");
+                        int updatedYear;
+                            while (true) {
+                                if (scanner.hasNextInt()) {
+                                    updatedYear = scanner.nextInt();
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter in a number.");
+                                    scanner.next();
+                                }
+                            }
+
+                    vehicle.setYear(updatedYear);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 2:
+                    System.out.println("* Please enter the updated Make of the Vehicle:");
+                    String updatedMake;
+                    while (true) {
+                        updatedMake = scanner.next().trim();
+                        if (!updatedMake.isEmpty()) {
+                            break;
+                        } else {
+                            System.out.println("* Please enter a vehicle make.");
+                        }
+                    }
+                    String updatedMakeEntry = updatedMake.substring(0, 1).toUpperCase() + updatedMake.substring(1);
+
+                    vehicle.setMake(updatedMakeEntry);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 3:
+                    System.out.println("* Please enter the updated Model of the Vehicle:");
+                        String updatedModel;
+                            while (true) {
+                                updatedModel = scanner.next().trim();
+                                if (!updatedModel.isEmpty()) {
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter a vehicle model.");
+                                }
+                            }
+                    String updatedModelEntry = updatedModel.substring(0, 1).toUpperCase() + updatedModel.substring(1);
+
+                    vehicle.setModel(updatedModelEntry);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 4:
+                    System.out.println("* Please enter the updated Type of the Vehicle:");
+                        String updatedType;
+                            while (true) {
+                                updatedType = scanner.next().trim();
+                                if (!updatedType.isEmpty()) {
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter a vehicle type.");
+                                }
+                            }
+                    String updatedTypeEntry = updatedType.substring(0, 1).toUpperCase() + updatedType.substring(1);
+
+                    vehicle.setVehicleType(updatedTypeEntry);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 5:
+                    System.out.println("* Please enter the updated Color of the Vehicle:");
+                        String updatedColor;
+                            while (true) {
+                                updatedColor = scanner.next().trim();
+                                if (!updatedColor.isEmpty()) {
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter a vehicle color.");
+                                }
+                            }
+                    String updatedColorEntry = updatedColor.substring(0, 1).toUpperCase() + updatedColor.substring(1);
+
+                    vehicle.setColor(updatedColorEntry);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 6:
+                    System.out.println("* Please enter the updated Odometer of the Vehicle:");
+                        int updatedOdometer;
+                            while (true) {
+                                if (scanner.hasNextInt()) {
+                                    updatedOdometer = scanner.nextInt();
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter a number.");
+                                    scanner.next();
+                                }
+                            }
+
+                    vehicle.setOdometer(updatedOdometer);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 7:
+                    System.out.println("* Please enter the updated Price of the Vehicle:");
+                        double updatedPrice;
+                            while (true) {
+                                if (scanner.hasNextDouble()) {
+                                    updatedPrice = scanner.nextDouble();
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter a number.");
+                                    scanner.next();
+                                }
+                            }
+
+                    vehicle.setPrice(updatedPrice);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 8:
+                    System.out.println("* Please enter the updated Availability of the Vehicle ('sold' | 'leased' | 'available'):");
+                        String updatedAvailability;
+                            while (true) {
+                                updatedAvailability = scanner.next().trim().toLowerCase();
+                                if (updatedAvailability.equals("sold") || updatedAvailability.equals("leased") || updatedAvailability.equals("available")) {
+                                    break;
+                                } else {
+                                    System.out.println("* Please enter one of the listed options.");
+                                }
+                            }
+
+                    vehicle.setSoldOrLeased(updatedAvailability);
+                    vehicleDAO.updateVehicle(vin, vehicle);
+
+                    break;
+
+                case 0:
+                    System.out.println("Returning to previous menu...");
+                    break;
+
+                default:
+                    System.out.println("\n* Please select one of the listed options\n");
+                    break;
+            }
+
+        } while (updateInput != 0);
+
+    }
+
+    public static void handleRemoveVehicle() {
+
+        System.out.println("* Please enter in the VIN of the Vehicle you would like to remove");
+            int removeVin;
                 while(true) {
                     if (scanner.hasNextInt()) {
-                        updateInput = scanner.nextInt();
+                        removeVin = scanner.nextInt();
                         break;
                     } else {
                         System.out.println("* Please enter in a number.");
@@ -502,156 +674,19 @@ public class MainUserInterface {
                     }
                 }
 
-        if(updateInput == 1) {
-
-            System.out.println("\n* Please enter in the updated Year of the Vehicle:");
-                int updatedYear;
-                    while(true) {
-                        if (scanner.hasNextInt()) {
-                            updatedYear = scanner.nextInt();
-                            break;
-                        } else {
-                            System.out.println("* Please enter in a number.");
-                            scanner.next();
-                        }
-                    }
-            vehicle.setYear(updatedYear);
-
-        } else if(updateInput == 2) {
-
-            System.out.println("* Please enter in the updated Make of the Vehicle:");
-                String updatedMake;
-                    while (true) {
-                        updatedMake = scanner.next().trim();
-                        if (updatedMake.isEmpty()) {
-                            System.out.println("* Please enter in a vehicle make.");
-                        } else {
-                            break;
-                        }
-                    }
-
-            String updatedMakeEntry = updatedMake.substring(0, 1).toUpperCase() + updatedMake.substring(1);
-
-            vehicle.setMake(updatedMakeEntry);
-
-        } else if(updateInput == 3) {
-
-            System.out.println("* Please enter in the updated Model of the Vehicle:");
-                String updatedModel;
-                    while (true) {
-                        updatedModel = scanner.next().trim();
-                        if (updatedModel.isEmpty()) {
-                            System.out.println("* Please enter in a vehicle model.");
-                        } else {
-                            break;
-                        }
-                    }
-            String updatedModelEntry = updatedModel.substring(0, 1).toUpperCase() + updatedModel.substring(1);
-
-            vehicle.setModel(updatedModelEntry);
-
-        } else if(updateInput == 4) {
-
-            System.out.println("* Please enter in the updated Type of the Vehicle:");
-                String updatedType;
-                    while (true) {
-                        updatedType = scanner.next().trim();
-                        if (updatedType.isEmpty()) {
-                            System.out.println("* Please enter in a vehicle type");
-                        } else {
-                            break;
-                        }
-                    }
-            String updatedTypeEntry = updatedType.substring(0,1).toUpperCase() + updatedType.substring(1);
-
-            vehicle.setVehicleType(updatedTypeEntry);
-
-        } else if(updateInput == 5) {
-
-            System.out.println("* Please enter in the updated Color of the Vehicle:");
-                String updatedColor;
-                    while (true) {
-                        updatedColor = scanner.next().trim();
-                        if (updatedColor.isEmpty()) {
-                            System.out.println("* Please enter in a vehicle type");
-                        } else {
-                            break;
-                        }
-                    }
-            String updatedColorEntry = updatedColor.substring(0,1).toUpperCase() + updatedColor.substring(1);
-
-            vehicle.setColor(updatedColorEntry);
-
-        } else if(updateInput == 6) {
-
-            System.out.println("* Please enter in the Mileage of the Vehicle:");
-                int updatedMileage;
-                    while(true) {
-                        if (scanner.hasNextInt()) {
-                            updatedMileage = scanner.nextInt();
-                            break;
-                        } else {
-                            System.out.println("* Please enter in a number.");
-                            scanner.next();
-                        }
-                    }
-
-            vehicle.setOdometer(updatedMileage);
-
-        } else if(updateInput == 7) {
-
-            System.out.println("* Please enter in the updated Price of the Vehicle:");
-                double updatedPrice;
-                    while(true) {
-                        if (scanner.hasNextDouble()) {
-                            updatedPrice = scanner.nextDouble();
-                            break;
-                        } else {
-                            System.out.println("* Please enter in a number.");
-                            scanner.next();
-                        }
-                    }
-
-            vehicle.setPrice(updatedPrice);
-
-        } else if(updateInput == 8) {
-
-            System.out.println("* Please enter in the updated Availability of the Vehicle");
-            System.out.println("'sold' | 'leased' | 'available'");
-                String updatedAvailability;
-                    while (true) {
-                        updatedAvailability = scanner.next().trim();
-                        if (updatedAvailability.isEmpty()) {
-                            System.out.println("* Please enter in one of the listed options");
-                        } else {
-                            break;
-                        }
-                    }
-
-            vehicle.setSoldOrLeased(updatedAvailability);
-
-        } else if(updateInput == 0) {
-
-            System.out.println("Returning to previous menu...");
-            return;
-
-        } else {
-            System.out.println("\n* Please select one of the listed options\n");
-        }
-
-        vehicleDAO.updateVehicle(vin, vehicle);
-
-    }
-
-    public static void handleRemoveVehicle() {
-
-        System.out.println("* Please enter in the VIN of the Vehicle you would like to remove");
-            int removeVin = scanner.nextInt();
-
         System.out.println("* Are you sure you want to remove " + removeVin + "?");
-            String confirmInput = scanner.next().toLowerCase().trim();
-                if(confirmInput.equals("yes")) {
-                    leaseContractDAO.deleteLeaseContract(removeVin);
+            String confirmInput;
+                while (true) {
+                    confirmInput = scanner.nextLine().toLowerCase().trim();
+                        if(confirmInput.equals("yes")) {
+                            vehicleDAO.deleteVehicle(removeVin);
+                            break;
+                        } else if(confirmInput.equals("no")) {
+                            System.out.println("Returning to previous menu...\n");
+                            return;
+                        } else {
+                            System.out.println("* Please enter in 'yes' or 'no'.");
+                        }
                 }
 
     }
@@ -684,6 +719,5 @@ public class MainUserInterface {
         System.out.println("                                 ********************* Command not found *********************");
         System.out.println("                                                     -- Please try again --");
     }
-
 
 }

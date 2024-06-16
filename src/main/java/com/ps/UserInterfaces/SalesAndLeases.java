@@ -310,7 +310,7 @@ public class SalesAndLeases {
         SalesContract salesContract = salesContractDAO.getOneSalesContract(updateSalesId);
 
         System.out.println("\n* What would you like to update?\n");
-        System.out.println("~ (1) Customer Name\n~ (2) Customer Email\n~ (3) VIN\n~ (4) Sales Tax Amount\n~ (5) Processing Fee\n~ (6) Finance Choice\n(0) Return to previous menu");
+        System.out.println("~ (1) Customer Name\n~ (2) Customer Email\n~ (3) VIN\n~ (4) Sales Tax Amount\n~ (5) Processing Fee\n~ (6) Finance Choice\n~ (0) Return to previous menu");
             int updateInput;
                 while(true) {
                     if (scanner.hasNextInt()) {
@@ -428,6 +428,11 @@ public class SalesAndLeases {
                     }
 
             salesContract.setFinanceChoice(updatedFinanceChoice);
+
+        } else if(updateInput == 0) {
+
+            System.out.println("Returning to previous menu...");
+            return;
 
         } else {
             System.out.println("\n* Please select one of the listed options\n");

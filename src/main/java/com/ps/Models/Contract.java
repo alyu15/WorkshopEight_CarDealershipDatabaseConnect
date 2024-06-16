@@ -16,6 +16,15 @@ public abstract class Contract {
         this.vin = vin;
     }
 
+    public Contract(String contractDate, String customerName, String customerEmail, int vin) {
+        this.contractDate = contractDate;
+        this.customerName = customerName;
+        this.customerEmail = customerEmail;
+        this.vin = vin;
+    }
+
+
+
     public int getContractId() {
         return contractId;
     }

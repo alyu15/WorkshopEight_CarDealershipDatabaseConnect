@@ -5,7 +5,6 @@ import com.ps.DAOs.SalesContractDAO;
 import com.ps.Models.LeaseContract;
 import com.ps.Models.SalesContract;
 
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -218,16 +217,79 @@ public class SalesAndLeases {
         String customerName = firstNameEntry + " " + lastNameEntry;
 
         System.out.println("\n* Please enter in the Email of the Customer");
-            String updatedEmail;
+            String customerEmail;
                 while (true) {
-                    updatedEmail = scanner.next().toLowerCase().trim();
-                    if (updatedEmail.isEmpty()) {
+                    customerEmail = scanner.next().toLowerCase().trim();
+                    if (customerEmail.isEmpty()) {
                         System.out.println("* Please enter in an email.");
                     } else {
                         break;
                     }
                 }
 
+        System.out.println("\n* Please enter in the VIN");
+            int vin;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        vin = scanner.nextInt();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a VIN.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("\n* Please enter in the updated Sales Tax Amount");
+            float salesTaxAmount;
+                while(true) {
+                    if (scanner.hasNextFloat()) {
+                        salesTaxAmount = scanner.nextFloat();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("\n* Please enter in the Recording Fee amount");
+            int recordingFee;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        recordingFee = scanner.nextInt();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("\n* Please enter in the Processing Fee amount");
+            int processingFee;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        processingFee = scanner.nextInt();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("\n* Please enter in 'yes' or 'no' for the Customer's Financing Choice\n");
+            String financeChoice;
+                while (true) {
+                    financeChoice = scanner.next().toLowerCase().trim();
+                    if (financeChoice.isEmpty()) {
+                        System.out.println("* Please enter in a finance choice.");
+                    } else {
+                        break;
+                    }
+                }
+
+        SalesContract salesContract = new SalesContract(formattedDate, customerName, customerEmail, vin, salesTaxAmount,
+                recordingFee, processingFee, financeChoice);
+
+        salesContractDAO.createSalesContract(salesContract);
 
     }
 
@@ -338,7 +400,7 @@ public class SalesAndLeases {
 
         } else if(updateInput == 5) {
 
-            System.out.println("\n* Please enter in the updated Processing Fee");
+            System.out.println("\n* Please enter in the updated Processing Fee amount");
                 int updatedProcessingFee;
                     while(true) {
                         if (scanner.hasNextInt()) {
@@ -423,6 +485,87 @@ public class SalesAndLeases {
 
     public static void handleNewLeaseContract(LeaseContractDAO leaseContractDAO) {
 
+        LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+            String formattedDate = currentDate.format(dateFormatter);
+
+        System.out.println("\n* Please enter in the First Name of the Customer.");
+            String firstName;
+                while (true) {
+                    firstName = scanner.next().toLowerCase().trim();
+                    if (firstName.isEmpty()) {
+                        System.out.println("* Please enter in a name.");
+                    } else {
+                        break;
+                    }
+                }
+            String firstNameEntry = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
+
+        System.out.println("\n* Please enter in the Last Name of the Customer.");
+            String lastName;
+                while (true) {
+                    lastName = scanner.next().toLowerCase().trim();
+                    if (lastName.isEmpty()) {
+                        System.out.println("* Please enter in a name.");
+                    } else {
+                        break;
+                    }
+                }
+            String lastNameEntry = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+
+        String customerName = firstNameEntry + " " + lastNameEntry;
+
+        System.out.println("\n* Please enter in the Email of the Customer");
+            String customerEmail;
+                while (true) {
+                    customerEmail = scanner.next().toLowerCase().trim();
+                    if (customerEmail.isEmpty()) {
+                        System.out.println("* Please enter in an email.");
+                    } else {
+                        break;
+                    }
+                }
+
+        System.out.println("\n* Please enter in the VIN");
+            int vin;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        vin = scanner.nextInt();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a VIN.");
+                        scanner.next();
+                    }
+                }
+
+        System.out.println("* Please enter in the Lease Fee amount.");
+            float leaseFee;
+                while(true) {
+                        if (scanner.hasNextFloat()) {
+                            leaseFee = scanner.nextFloat();
+                            break;
+                        } else {
+                            System.out.println("* Please enter in a number.");
+                            scanner.next();
+                        }
+                    }
+
+        System.out.println("* Please enter in the Expected Ending Value amount");
+            double expectedEndingValue;
+                while(true) {
+                        if (scanner.hasNextDouble()) {
+                            expectedEndingValue = scanner.nextDouble();
+                            break;
+                        } else {
+                            System.out.println("* Please enter in a number.");
+                            scanner.next();
+                        }
+                    }
+
+        LeaseContract leaseContract = new LeaseContract(formattedDate, customerName, customerEmail, vin, leaseFee, expectedEndingValue);
+
+        leaseContractDAO.createLeaseContract(leaseContract);
+
     }
 
     public static void handleLeaseContractUpdate(LeaseContractDAO leaseContractDAO) {
@@ -442,102 +585,116 @@ public class SalesAndLeases {
         LeaseContract leaseContract = leaseContractDAO.getOneLeaseContract(updateLeaseId);
 
         System.out.println("* What would you like to update?\n");
-        System.out.println("~ Customer Name\n~ Customer Email\n~ Vin\n~ Lease Fee\n~ Expected Ending Value\n");
-        String updateInput = scanner.next().toLowerCase().trim();
+        System.out.println("~ (1) Customer Name\n~ (2) Customer Email\n~ (3) Vin\n~ (4) Lease Fee\n~ (5) Expected Ending Value\n~ (0) Return to previous menu");
+            int updateInput;
+                while(true) {
+                    if (scanner.hasNextInt()) {
+                        updateInput = scanner.nextInt();
+                        break;
+                    } else {
+                        System.out.println("* Please enter in a number.");
+                        scanner.next();
+                    }
+                }
 
-            if(updateInput.contains("customer name")) {
-                System.out.println("* Please enter in the updated Customer First Name");
-                    String firstName;
-                        while (true) {
-                            firstName = scanner.next().toLowerCase().trim();
-                            if (firstName.isEmpty()) {
-                                System.out.println("* Please enter in a name.");
-                            } else {
-                                break;
-                            }
+        if(updateInput == 1) {
+            System.out.println("* Please enter in the updated Customer First Name");
+                String firstName;
+                    while (true) {
+                        firstName = scanner.next().toLowerCase().trim();
+                        if (firstName.isEmpty()) {
+                            System.out.println("* Please enter in a name.");
+                        } else {
+                            break;
                         }
-                    String firstNameEntry = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
+                    }
+                String firstNameEntry = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
 
-                System.out.println("* Please enter in the updated Customer Last Name");
-                    String lastName;
-                        while (true) {
-                            lastName = scanner.next().toLowerCase().trim();
-                            if (lastName.isEmpty()) {
-                                System.out.println("* Please enter in a name.");
-                            } else {
-                                break;
-                            }
+            System.out.println("* Please enter in the updated Customer Last Name");
+                String lastName;
+                    while (true) {
+                        lastName = scanner.next().toLowerCase().trim();
+                        if (lastName.isEmpty()) {
+                            System.out.println("* Please enter in a name.");
+                        } else {
+                            break;
                         }
-                    String lastNameEntry = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+                    }
+                String lastNameEntry = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
 
-                String updatedName = firstNameEntry + " " + lastNameEntry;
-                leaseContract.setCustomerName(updatedName);
+            String updatedName = firstNameEntry + " " + lastNameEntry;
+            leaseContract.setCustomerName(updatedName);
 
-            } else if(updateInput.contains("customer email")) {
+        } else if(updateInput == 2) {
 
-                System.out.println("* Please enter in the updated Customer Email");
-                    String updatedEmail;
-                        while (true) {
-                            updatedEmail = scanner.next().trim();
-                            if (updatedEmail.isEmpty()) {
-                                System.out.println("* Please enter in an email.");
-                            } else {
-                                break;
-                            }
+            System.out.println("* Please enter in the updated Customer Email");
+                String updatedEmail;
+                    while (true) {
+                        updatedEmail = scanner.next().trim();
+                        if (updatedEmail.isEmpty()) {
+                            System.out.println("* Please enter in an email.");
+                        } else {
+                            break;
                         }
-                leaseContract.setCustomerEmail(updatedEmail);
+                    }
+            leaseContract.setCustomerEmail(updatedEmail);
 
-            } else if(updateInput.contains("vin")) {
+        } else if(updateInput == 3) {
 
-                System.out.println("* Please enter in the updated VIN");
-                    int updatedVin;
-                        while(true) {
-                            if (scanner.hasNextInt()) {
-                                updatedVin = scanner.nextInt();
-                                break;
-                            } else {
-                                System.out.println("* Please enter in a number.");
-                                scanner.next();
-                            }
+            System.out.println("* Please enter in the updated VIN");
+                int updatedVin;
+                    while(true) {
+                        if (scanner.hasNextInt()) {
+                            updatedVin = scanner.nextInt();
+                            break;
+                        } else {
+                            System.out.println("* Please enter in a number.");
+                            scanner.next();
                         }
-                leaseContract.setVin(updatedVin);
+                    }
+            leaseContract.setVin(updatedVin);
 
-            } else if(updateInput.contains("lease fee")) {
+        } else if(updateInput == 4) {
 
-                System.out.println("* Please enter in the updated Lease Fee");
-                    float updatedLeaseFee;
-                        while(true) {
-                            if (scanner.hasNextFloat()) {
-                                updatedLeaseFee = scanner.nextFloat();
-                                break;
-                            } else {
-                                System.out.println("* Please enter in a number.");
-                                scanner.next();
-                            }
+            System.out.println("* Please enter in the updated Lease Fee");
+                float updatedLeaseFee;
+                    while(true) {
+                        if (scanner.hasNextFloat()) {
+                            updatedLeaseFee = scanner.nextFloat();
+                            break;
+                        } else {
+                            System.out.println("* Please enter in a number.");
+                            scanner.next();
                         }
-                leaseContract.setLeaseFee(updatedLeaseFee);
+                    }
+            leaseContract.setLeaseFee(updatedLeaseFee);
 
-            } else if(updateInput.contains("expected ending value")) {
+        } else if(updateInput == 5) {
 
-                System.out.println("* Please enter in the updated Expected Ending Value");
-                    double updatedEndingValue;
-                        while(true) {
-                            if (scanner.hasNextDouble()) {
-                                updatedEndingValue = scanner.nextDouble();
-                                break;
-                            } else {
-                                System.out.println("* Please enter in a number.");
-                                scanner.next();
-                            }
+            System.out.println("* Please enter in the updated Expected Ending Value");
+                double updatedEndingValue;
+                    while(true) {
+                        if (scanner.hasNextDouble()) {
+                            updatedEndingValue = scanner.nextDouble();
+                            break;
+                        } else {
+                            System.out.println("* Please enter in a number.");
+                            scanner.next();
                         }
-                leaseContract.setExpectedEndingValue(updatedEndingValue);
-            } else {
-                System.out.println("Please select one of the listed options to update");
-            }
+                    }
+            leaseContract.setExpectedEndingValue(updatedEndingValue);
+
+        } else if(updateInput == 0) {
+
+            System.out.println("Returning to previous menu...");
+            return;
+
+        } else {
+            System.out.println("Please select one of the listed options to update");
+        }
 
         leaseContractDAO.updateLeaseContract(updateLeaseId, leaseContract);
     }
-
 
     public static void handleRemoveLeaseContract(LeaseContractDAO leaseContractDAO) {
 

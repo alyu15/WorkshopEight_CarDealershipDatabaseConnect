@@ -13,6 +13,14 @@ public class LeaseContract extends Contract{
         this.expectedEndingValue = expectedEndingValue;
     }
 
+    public LeaseContract(String contractDate, String customerName,
+                         String customerEmail, int vin, float leaseFee, double expectedEndingValue) {
+
+        super(contractDate, customerName, customerEmail, vin);
+        this.leaseFee = leaseFee;
+        this.expectedEndingValue = expectedEndingValue;
+    }
+
     public float getLeaseFee() {
         return leaseFee;
     }

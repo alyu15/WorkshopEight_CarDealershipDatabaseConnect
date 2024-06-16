@@ -76,9 +76,9 @@ public class SalesContractDAO implements SalesContractInt {
         try(
                 Connection connection = basicDataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO sales_contracts(contract_id, contract_date, customer_name, customer_email," +
+                        "INSERT INTO sales_contracts(contract_date, customer_name, customer_email," +
                                 "vin, sales_tax_amount, recording_fee, processing_fee, is_financing)" +
-                                " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                                " VALUES(?, ?, ?, ?, ?, ?, ?, ?)"
                 );
         ) {
 
@@ -154,14 +154,14 @@ public class SalesContractDAO implements SalesContractInt {
 
     public void generateNewSalesContractParameters(PreparedStatement preparedStatement, SalesContract salesContract) throws SQLException {
 
-        preparedStatement.setInt(1, salesContract.getContractId());
-        preparedStatement.setString(2, salesContract.getContractDate());
-        preparedStatement.setString(3,salesContract.getCustomerName());
-        preparedStatement.setString(4, salesContract.getCustomerEmail());
+        preparedStatement.setString(1, salesContract.getContractDate());
+        preparedStatement.setString(2,salesContract.getCustomerName());
+        preparedStatement.setString(3, salesContract.getCustomerEmail());
+        preparedStatement.setInt(4, salesContract.getVin());
 
-        preparedStatement.setInt(5, salesContract.getVin());
-        preparedStatement.setFloat(6, salesContract.getSalesTaxAmount());
-        preparedStatement.setInt(7, salesContract.getRecordingFee());
+        preparedStatement.setFloat(5, salesContract.getSalesTaxAmount());
+        preparedStatement.setInt(6, salesContract.getRecordingFee());
+        preparedStatement.setInt(7, salesContract.getProcessingFee());
         preparedStatement.setString(8, salesContract.getFinanceChoice());
 
     }

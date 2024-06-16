@@ -76,9 +76,9 @@ public class LeaseContractDAO implements LeaseContractInt {
         try(
                 Connection connection = basicDataSource.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(
-                        "INSERT INTO lease_contracts(contract_id, contract_date, customer_name, customer_email," +
+                        "INSERT INTO lease_contracts(contract_date, customer_name, customer_email," +
                                 "vin, lease_fee, expected_ending_value)" +
-                                " VALUES(?, ?, ?, ?, ?, ?, ?)"
+                                " VALUES(?, ?, ?, ?, ?, ?)"
                 );
         ) {
 
@@ -154,14 +154,13 @@ public class LeaseContractDAO implements LeaseContractInt {
 
     public void generateNewLeaseContractParameters(PreparedStatement preparedStatement, LeaseContract leaseContract) throws SQLException {
 
-        preparedStatement.setInt(1, leaseContract.getContractId());
-        preparedStatement.setString(2, leaseContract.getContractDate());
-        preparedStatement.setString(3,leaseContract.getCustomerName());
-        preparedStatement.setString(4, leaseContract.getCustomerEmail());
+        preparedStatement.setString(1, leaseContract.getContractDate());
+        preparedStatement.setString(2,leaseContract.getCustomerName());
+        preparedStatement.setString(3, leaseContract.getCustomerEmail());
 
-        preparedStatement.setInt(5, leaseContract.getVin());
-        preparedStatement.setFloat(6, leaseContract.getLeaseFee());
-        preparedStatement.setDouble(7, leaseContract.getExpectedEndingValue());
+        preparedStatement.setInt(4, leaseContract.getVin());
+        preparedStatement.setFloat(5, leaseContract.getLeaseFee());
+        preparedStatement.setDouble(6, leaseContract.getExpectedEndingValue());
 
     }
 

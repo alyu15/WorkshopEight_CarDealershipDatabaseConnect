@@ -17,7 +17,7 @@ Since the application is pretty similar to its predecessor, I will be glossing o
 ><details>
 ><summary> Home Screen </summary>
 >
-> IMAGE HERE
+> ![HomeScreen](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/HomeScreen.JPG)
 >
 ></details>
 
@@ -32,7 +32,7 @@ Since the application is pretty similar to its predecessor, I will be glossing o
 ><details>
 ><summary> Manage Vehicles Screen </summary>
 >
-> 
+> ![ManageVehiclesScreen](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/ManageVehiclesScreen.JPG)
 ></details>
 
 If the user chooses 'Update a vehicle', they are first prompted to enter in the VIN of the vehicle they would like to update.
@@ -41,7 +41,7 @@ Afterwards, the user is shown a list which they are able to select from to updat
 ><details>
 ><summary> Updating a Vehicle </summary>
 >
-> IMAGE HERE
+> ![UpdatedVehicle](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/UpdateVehicle.JPG)
 ></details>
 
 ## Manage Sales and Leases
@@ -59,9 +59,9 @@ Afterwards, the user is shown a list which they are able to select from to updat
 ><details>
 ><summary> Manage Sales and Leases Screen </summary>
 >
-> IMAGE HERE
+> ![SalesAndLeasesScreen](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/SalesAndLeasesScreen.JPG)
 > 
-> IMAGE HERE
+> ![SalesContract](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/SalesScreen.JPG)
 ></details>
 
 ## Interesting Piece of Code
@@ -90,5 +90,5 @@ I found it interesting because it's a simple return method that ended up doing s
 <div align="center">
 <b>Thank you for taking the time out to check out my application!</b>
 
-
+![Exit](https://github.com/alyu15/WorkshopEight_CarDealershipDatabaseConnect/blob/de358650eac9c0c7ecefdc43beacab415cbf2cf9/images/Exit.JPG)
 </div>
